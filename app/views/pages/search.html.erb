@@ -1,0 +1,26 @@
+<div class="wrapper-grey">
+  <h2 class="text-center" style="margin-bottom: 30px;">Liste des annonces à <%= params[:city] %> inférieures à <%= params[:prix_metre_carre] %>€ / m2</h2>
+  <div class="container">
+    <div class="row">
+      <% @selected_annonces.each do |annonce| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(annonce.city + ".jpg") %>);">
+            <div class="card-category"><%= annonce.city %> - <%= annonce.sector %> (<%= annonce.zip_code %>)</div>
+            <div class="card-description">
+              <h2>Surface : <%= annonce.surface.round %> m2</h2>
+              <h2>Prix : <%= annonce.price %>€</h2>
+              <p>Nombre de pièces : <%= annonce.room %></p>
+              <p>Site annonce : <%= annonce.website %></p>
+            </div>
+            <div class="card-user">
+              <%= annonce.prix_metre_carre.round %>€ / m2
+            </div>
+            <a class="card-link" href="#" ></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+ <!-- style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');" -->

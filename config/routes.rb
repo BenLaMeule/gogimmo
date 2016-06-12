@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'pages/home'
+
+  root to: 'pages#home'
+  get 'search', to: 'pages#search'
   resources :annonces, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

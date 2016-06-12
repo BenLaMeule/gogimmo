@@ -11,17 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609112451) do
+ActiveRecord::Schema.define(version: 20160610120208) do
 
   create_table "annonces", force: :cascade do |t|
     t.string   "city"
     t.integer  "price"
     t.float    "surface"
     t.integer  "room"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "zip_code"
     t.string   "sector"
+    t.string   "website"
+    t.float    "prix_metre_carre"
+    t.date     "maj"
   end
 
 end
