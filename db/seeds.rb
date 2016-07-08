@@ -10,6 +10,37 @@ require 'nokogiri'
 
 Annonce.destroy_all
 
+# Villes : Rouen, Bordeaux, Paris
+# Sites : paruvendu.fr, seloger.com, explorimmo.com & pap.fr
+
+# PARUVENDU.FR
+# Bordeaux
+puts "PARUVENDU.FR - Bordeaux"
+for i in 1..10
+  url = "http://www.paruvendu.fr/immobilier/annonceimmofo/liste/listeAnnonces?tt=1&tbApp=1&tbDup=1&tbChb=1&tbLof=1&tbAtl=1&tbPla=1&tbMai=1&tbVil=1&tbCha=1&tbPro=1&tbHot=1&tbMou=1&tbFer=1&nbp0=99&pa=FR&codeINSEE=33XX0,&i=1467968801&p=#{i}"
+  html_file = open(url)
+  html_doc = Nokogiri::HTML(html_file)
+  html_doc.search('#bloc_liste .lazyload_bloc.annonce.annonceimmo').each do |element|
+    price = element.search('.price2').children.text.gsub(/\D/,"").to_i
+    surface
+    room
+    city
+    zip_code
+    sector
+    website = "paruvendu.fr"
+    prix_metre_carre = price / surface
+
+
+  end
+  puts "Page #{i}/10 completed"
+end
+
+# Paris
+puts "PARUVENDU.FR - Paris"
+
+# Rouen
+puts "PARUVENDU.FR - Rouen"
+
 # LOGIC IMMO
 # Bordeaux
 puts "LOGIC IMMO - Bordeaux"

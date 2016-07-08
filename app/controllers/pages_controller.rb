@@ -5,6 +5,6 @@ class PagesController < ApplicationController
 
   def search
     @annonces = Annonce.all
-    @selected_annonces = @annonces.where(city: params[:city], prix_metre_carre: (0..params[:prix_metre_carre].to_i).to_a)
+    @selected_annonces = @annonces.where(city: params[:city], prix_metre_carre: (0..params[:prix_metre_carre].to_i).to_a).order(:prix_metre_carre)
   end
 end
