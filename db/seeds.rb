@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'open-uri'
 require 'nokogiri'
 
@@ -46,8 +39,8 @@ for i in 1..15
       surface = element.search('.offer-size-rooms a').children.children.first.text.to_f
       room = element.search('.offer-size-rooms a').children.children.last.text.to_i
       city = element.search('.offer-places-block .offer-city').children.text.gsub(/\d|[^a-zA-Z]/,"")
-      zip_code = element.search('.offer-places-block .offer-city').children.text.gsub(/\D/,"").to_i
-      sector = element.search('.offer-places-block .offer-sector').children.text
+      zip_code = element.search('.offer-places-block .offer-city').children.text.match(/(?<=\().+?(?=\))/)[0]
+      sector = element.search('.offer-places-block .offer-block.offer-link').children.text
       website = "Logic-Immo"
       prix_metre_carre = price / surface
       maj = html_doc.search('.offer-picture .offer-update').first.children.text.match(/(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}/)[0].to_date
