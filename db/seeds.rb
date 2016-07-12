@@ -30,7 +30,7 @@ end
 
 # Paris
 puts "LOGIC IMMO - Paris"
-for i in 1..15
+for i in 1..8
   url = "http://www.logic-immo.com/vente-immobilier-paris-75,100_1/options/groupprptypesids=1,2,6,7,12,15/page=#{i}/order=update_date_desc"
   html_file = open(url)
   html_doc = Nokogiri::HTML(html_file)
@@ -46,7 +46,7 @@ for i in 1..15
       maj = html_doc.search('.offer-picture .offer-update').first.children.text.match(/(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}/)[0].to_date
       Annonce.create(price: price, surface: surface, room: room, city: city, zip_code: zip_code, sector: sector, maj: maj, website: website, prix_metre_carre: prix_metre_carre)
     end
-  puts "Page #{i}/15 completed"
+  puts "Page #{i}/8 completed"
 end
 
 # PARUVENDU.FR
