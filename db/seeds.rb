@@ -49,6 +49,27 @@ for i in 1..8
   puts "Page #{i}/8 completed"
 end
 
+# Rouen
+puts "LOGIC IMMO - Rouen"
+for i in 1..15
+  url = "http://www.logic-immo.com/vente-immobilier-rouen-tous-codes-postaux,304_99/options/groupprptypesids=1,2,6,7,12,15/page=#{i}/order=update_date_desc"
+  html_file = open(url)
+  html_doc = Nokogiri::HTML(html_file)
+    html_doc.search('.offer-block .offer-details .offer-details-wrapper').each do |element|
+      price = element.search('.offer-price').children.children.text.gsub(/\D/,"").to_i
+      surface = element.search('.offer-size-rooms a').children.children.first.text.to_f
+      room = element.search('.offer-size-rooms a').children.children.last.text.to_i
+      city = element.search('.offer-places-block .offer-city').children.text.gsub(/\d|[^a-zA-Z]/,"")
+      zip_code = element.search('.offer-places-block .offer-city').children.text.match(/(?<=\().+?(?=\))/)[0]
+      sector = element.search('.offer-places-block .offer-block.offer-link').children.text
+      website = "Logic-Immo"
+      prix_metre_carre = price / surface
+      maj = html_doc.search('.offer-picture .offer-update').first.children.text.match(/(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}/)[0].to_date
+      Annonce.create(price: price, surface: surface, room: room, city: city, zip_code: zip_code, sector: sector, maj: maj, website: website, prix_metre_carre: prix_metre_carre)
+    end
+  puts "Page #{i}/15 completed"
+end
+
 # PARUVENDU.FR
 # Bordeaux
 # puts "PARUVENDU.FR - Bordeaux"
